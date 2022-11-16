@@ -1,4 +1,46 @@
 openapi: 3.0.2
 info:
-  title: Property management
-  version: 1.0.0
+    title: Property management
+    version: 1.0.0
+paths:
+    '/properties ':
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/getPropertiesResponse'
+                            examples:
+                                getPropertiesExample:
+                                    value:
+                                        -
+                                            createdAt: '2022-11-01 00:00:00'
+                                            name: string
+                                            location: string
+                    description: Returns an array of properties
+                '403':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Required:
+                                    value: A token is required for authentication
+                    description: Token required
+            security:
+                -
+                    ApiKeyAuth: []
+components:
+    schemas:
+        getPropertiesResponse:
+            description: ''
+            type: array
+            items:
+                $ref: '#/components/schemas/getPropertiesResponse'
+    securitySchemes:
+        ApiKeyAuth:
+            type: apiKey
+            description: API Key
+            name: x-access-token
+            in: header

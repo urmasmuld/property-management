@@ -1,9 +1,11 @@
-const express = require('express');
-const app = express();
-const swaggerUi = require('swagger-ui-express');
-const yamljs = require('yamljs');
-const swaggerDocument = yamljs.load('./swagger.yaml');
+const http = require("http");
+const app = require("./app");
+const server = http.createServer(app);
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
 
-app.listen(3000,()=>console.log('http://localhost:3000/docs'));
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+  console.log(`http://localhost:${port}/docs`);
+});
