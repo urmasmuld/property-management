@@ -2,9 +2,19 @@ openapi: 3.0.2
 info:
     title: Property management
     version: 1.0.0
+    description: Property management API docs
+    tags:
+        -
+            name: properties
+            description: Operations related to properties
+        -
+            name: sessions
+            description: Operations related to sessions
 paths:
-    '/properties ':
+    /properties:
         get:
+            tags:
+                - properties
             responses:
                 '200':
                     content:
@@ -43,6 +53,8 @@ paths:
                                     name: Property 222
                                     location: Somewhere in Estonia aaa
                 required: true
+            tags:
+                - properties
             responses:
                 '201':
                     content:
@@ -79,6 +91,17 @@ paths:
             security:
                 -
                     ApiKeyAuth: []
+        delete:
+            tags:
+                - properties
+            responses:
+                '204':
+                    description: Success
+                '404':
+                    description: no Property with given id found
+            security:
+                -
+                    ApiKeyAuth: []
     /sessions:
         post:
             requestBody:
@@ -92,6 +115,8 @@ paths:
                                     email: urmas.muldmaa@vikk.ee
                                     password: '1234567'
                 required: true
+            tags:
+                - sessions
             responses:
                 '200':
                     content:

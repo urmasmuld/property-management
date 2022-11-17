@@ -72,7 +72,7 @@ app.post("/sessions", async (req, res) => {
 
     // Validate user input
     if (!(email && password)) {
-      res.status(411).send("All input is required");
+      res.status(400).send("All input is required");
     }
     // Validate if user exist in our database
     const user = await User.findOne({ email });
@@ -147,6 +147,22 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/properties', auth, (req,res)=> {
     res.send(properties);
+});
+
+app.delete('/properties', auth, async (req,res)=> {
+
+  try {
+    await Properties.findOneAndRemove({"_id": req.body.id});
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: 'no Property with given id found',
+    });
+  }  
 });
 
 // This should be the last route else any after it won't work
