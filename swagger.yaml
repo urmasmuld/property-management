@@ -31,6 +31,55 @@ paths:
             security:
                 -
                     ApiKeyAuth: []
+    /sessions:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            Sessions_example:
+                                value:
+                                    email: urmas.muldmaa@vikk.ee
+                                    password: '1234567'
+                required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Success:
+                                    value:
+                                        first_name: Urmas
+                                        last_name: Muldmaa
+                                        _id: 637551d00d5e26274ca15b8a
+                                        email: urmas.muldmaa@vikk.ee
+                                        password: $2a$10$NOfG37XC/ze4QMlgTakLCuFgbNpck/YUOJe35u.tIUdEo8wyPV/Bq
+                                        __v: 0
+                                        token: >-
+                                            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM3NTUxZDAwZDVlMjYyNzRjYTE1YjhhIiwiZW1haWwiOiJ1cm1hcy5tdWxkbWFhQHZpa2suZWUiLCJpYXQiOjE2Njg2NjYwMjEsImV4cCI6MTY2ODY3MzIyMX0.Ygqo7xqcS8PTzcKse0MSQZksRSzBuVMRsLPbEjHZdWc
+                    description: User login successful
+                '400':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Invalid:
+                                    value: Invalid Credentials
+                    description: Invalid credentials
+                '411':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Required:
+                                    value: All input is required
+                    description: Input required
 components:
     schemas:
         getPropertiesResponse:
