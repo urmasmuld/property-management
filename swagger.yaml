@@ -31,6 +31,54 @@ paths:
             security:
                 -
                     ApiKeyAuth: []
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            Valid data:
+                                value:
+                                    name: Property 222
+                                    location: Somewhere in Estonia aaa
+                required: true
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Created:
+                                    value:
+                                        createdAt: '2022-11-17 08:39:37'
+                                        name: Property 2
+                                        _id: 6375d729f0f5667c4857d4bd
+                                        location: Somewhere in Estoniaaaa
+                                        __v: 0
+                    description: returns Created
+                '400':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Required:
+                                    value: All input is required
+                    description: Invalid or missing data
+                '409':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Duplicate:
+                                    value: Property Already Exist!
+                    description: Duplicate
+            security:
+                -
+                    ApiKeyAuth: []
     /sessions:
         post:
             requestBody:
